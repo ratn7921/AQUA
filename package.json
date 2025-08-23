@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+ "scripts": {
+  "dev": "nodemon server.js",
+  "build": "npm install --prefix frontend && npm run build --prefix frontend",
+  "start": "node server.js"
+},
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^1.41.3",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^17.0.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
+    "morgan": "~1.9.1",
+    "multer": "^2.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "serve-favicon": "^2.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "jest": "^30.0.2",
+    "supertest": "^7.1.1"
+  }
+}
