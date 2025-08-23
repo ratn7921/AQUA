@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Tailwind Custom Classes */
+.glass-bg {
+  @apply bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl;
+}
+
+.glass-input {
+  @apply w-full p-3 rounded-lg bg-white/20 placeholder-white text-white;
+}
+
+.glass-btn {
+  @apply w-full bg-cyan-600 hover:bg-cyan-700 py-2 rounded-lg font-semibold;
+}
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-[float_6s_ease-in-out_infinite] {
+  animation: float 6s ease-in-out infinite;
+}
+
+
+/* 📍 Add to index.css (global styles) */
+
+.leaflet-overlay-pane svg {
+  user-select: none;              /* Standard */
+  -moz-user-select: none;         /* Firefox */
+  -webkit-user-select: none;      /* Safari */
+}
+
+html,
+:host {
+  text-size-adjust: 100%;         /* Standard */
+  -webkit-text-size-adjust: 100%; /* Safari */
+}
