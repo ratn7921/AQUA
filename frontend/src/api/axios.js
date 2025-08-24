@@ -1,9 +1,8 @@
 // src/api/index.js
 import axios from 'axios'
 
-// Use Vite env var VITE_API_URL if set, otherwise default to same-origin API prefix
-// In Render leave VITE_API_URL unset (uses '/api'), for local dev set VITE_API_URL=http://localhost:5000
-const baseURL = import.meta.env.VITE_API_URL || '/api'
+// Use Vite env var if provided; otherwise same-origin root
+const baseURL = import.meta.env.VITE_API_URL || ''
 
 const api = axios.create({
   baseURL,

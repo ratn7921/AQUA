@@ -21,15 +21,15 @@ export default function Register() {
     setLoading(true);
 
     // send FormData (do NOT set Content-Type manually; browser sets the multipart boundary)
-    const fd = new FormData();
-    fd.append('name', name);
-    fd.append('email', email);
-    fd.append('password', password);
-    fd.append('role', role);
-    if (avatarFile) fd.append('avatar', avatarFile);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('role', role);
+    if (avatarFile) formData.append('avatar', avatarFile);
 
     try {
-      const res = await api.post('/auth/register', fd);
+      const res = await api.post('/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       setSuccess('Registration successful!');
