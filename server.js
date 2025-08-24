@@ -1,6 +1,7 @@
 // ------------------------- server.js -------------------------
 require('dotenv').config(); // load env first
 
+const mongoose = require("mongoose");
 const connectDB = require('./server/config/db');
 
 const start = async () => {
@@ -15,7 +16,12 @@ const start = async () => {
   });
 };
 
-start().catch(err => {
-  console.error('Startup error:', err);
-  process.exit(1);
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("✅ MongoDB connected");
+    start().catch(err => {
+      console.error('Startup error:', err);
+      process.exit(1);
+    });
+  })
+  .catch(err => console.error("❌ MongoDB connection error:", err));
