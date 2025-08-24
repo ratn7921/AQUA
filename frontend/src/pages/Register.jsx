@@ -29,7 +29,8 @@ export default function Register() {
     if (avatarFile) formData.append('avatar', avatarFile);
 
     try {
-      const res = await api.post('/auth/register', formData);
+      // ensure request hits the server route mounted at /api/auth
+      const res = await api.post('/api/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       setSuccess('Registration successful!');
