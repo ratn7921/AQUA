@@ -1,24 +1,14 @@
-
-
-
-
 // src/api/index.js
-import axios from 'axios';
+import axios from 'axios'
 
-const instance = axios.create({
-  baseURL: 'http://localhost:5000/api',
-  withCredentials: true,
-});
+// Use Vite env var VITE_API_URL if set, otherwise use same origin (relative)
+const baseURL = import.meta.env.VITE_API_URL || ''
 
-instance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+const api = axios.create({
+  baseURL,
+  // optionally set defaults:
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: false
+})
 
-export default instance;
+export default api
