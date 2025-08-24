@@ -2,11 +2,11 @@
   "name": "server",
   "version": "0.0.0",
   "private": true,
- "scripts": {
-  "dev": "nodemon server.js",
-  "build": "npm install --prefix frontend && npm run build --prefix frontend",
-  "start": "node server.js"
-},
+  "scripts": {
+    "dev": "nodemon server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "node server.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
