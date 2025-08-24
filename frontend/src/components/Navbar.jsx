@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
-import Logo from '../assets/logo.png';
+const logo = new URL('../../assets/logo.png', import.meta.url).href
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
@@ -90,7 +90,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={goHome}>
             <motion.img
-              src={Logo}
+              src={logo}
               alt="Aqua Logo"
               className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-white/30 shadow-lg backdrop-blur-sm"
               whileHover={{ scale: 1.1 }}
@@ -235,7 +235,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-gray-700/20 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl">
               <div className="flex items-center">
                 <img
-                  src={Logo}
+                  src={logo}
                   alt="Aqua Logo"
                   className="h-8 w-8 rounded-full border-2 border-white/30 dark:border-gray-700/30 shadow-lg cursor-pointer"
                   onClick={goHome}
