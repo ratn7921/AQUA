@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import api from '../api/axios';
 import registerBg from '../assets/registerBg.mp4';
 
 export default function Register() {
@@ -21,15 +20,16 @@ export default function Register() {
     setSuccess('');
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('role', role);
-    if (avatarFile) formData.append('avatar', avatarFile);
+    // send FormData (do NOT set Content-Type manually; browser sets the multipart boundary)
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('password', password);
+    fd.append('role', role);
+    if (avatarFile) fd.append('avatar', avatarFile);
 
     try {
-      const res = await axios.post('/auth/register', formData);
+      const res = await api.post('/auth/register', fd);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       setSuccess('Registration successful!');
