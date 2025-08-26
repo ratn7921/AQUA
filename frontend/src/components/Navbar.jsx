@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
-const logo = new URL('../../assets/logo.png', import.meta.url).href
+//const logo = new URL('../../assets/logo.png', import.meta.url).href
+import logo from '../../assets/logo.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaMoon, FaSun } from 'react-icons/fa';
 

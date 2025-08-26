@@ -20,17 +20,23 @@ exports.register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 //const user = await User.create({ name, email, password: hashedPassword, role });
     
- const avatarPath = req.file
-     ? `/uploads/${req.file.filename}`
-     : undefined;
+    // Prefer remote URL (e.g. multer-storage-cloudinary sets req.file.path to a full URL).
+    // Fall back to local uploads path only when req.file.path is not a URL.
+    const avatarPath = req.file
+      ? (typeof req.file.path === 'string' && /^https?:\/\//i.test(req.file.path)
+          ? req.file.path
+          : `/uploads/${req.file.filename}`)
+      : undefined;
++    // Debug log (remove in production)
++    console.log('📝 [register] avatarPath to save:', avatarPath);
 
-   const user = await User.create({
-     name,
-     email,
-     password: hashedPassword,
-     role,
-     ...(avatarPath && { avatar: avatarPath })
-   });
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      avatar: avatarPath
+    });
     
     res.status(201).json({
       user: {
