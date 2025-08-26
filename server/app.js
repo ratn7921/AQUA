@@ -135,6 +135,27 @@ app.use((req, res, next) => {
   next()
 })
 
+// Compatibility shim: rewrite top-level API calls that lack the "/api" prefix.
+// Must be registered before static file serving and route mounts.
+app.use((req, res, next) => {
+  try {
+    if (!req.path.startsWith('/api/')) {
+      const roots = [
+        'auth', 'users', 'sightings', 'trips', 'incidents', 'species',
+        'media', 'comments', 'likes', 'role-request', 'role-requests',
+        'analytics', 'offline', 'worms', 'upload', 'flights', 'tours', 'diving'
+      ];
+      const first = (req.path.split('/')[1] || '').toLowerCase();
+      if (roots.includes(first)) {
+        req.url = `/api${req.url}`;
+      }
+    }
+  } catch (e) {
+    // on error, leave URL untouched
+  }
+  next();
+});
+
 // ✅ Helper to safely load routes
 function safeRoute(routePath, routerFile) {
   try {
